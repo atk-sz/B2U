@@ -1,23 +1,37 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Home from '../screens/Home';
+import HomeScreen from '../screens/HomeScreen';
 import Header from '../components/navs/Header';
+import SplashScreen from '../screens/SplashScreen';
+import LoginScreen from '../screens/auth/LoginScreen';
 
 const ScreenStack = createStackNavigator()
 
 const HomeStack = () => {
     return (
-        <ScreenStack.Navigator initialRouteName="Home"
+        <ScreenStack.Navigator initialRouteName="Splash"
             screenOptions={{
                 header: (Props) => <Header {...Props} />
             }
             }
-            >
-            <ScreenStack.Screen 
-            options={{
-                title:"Home"
-            }}
-            name="Home" component={Home} />
+        >
+            <ScreenStack.Screen
+                options={{
+                    headerShown: false,
+                }}
+                name="Splash"
+                component={SplashScreen}
+            />
+            <ScreenStack.Screen
+                options={{
+                    title: "Home"
+                }}
+                name="Home" component={HomeScreen} />
+            <ScreenStack.Screen
+                options={{
+                    title: "Login"
+                }}
+                name="Login" component={LoginScreen} />
         </ScreenStack.Navigator>
     )
 }
