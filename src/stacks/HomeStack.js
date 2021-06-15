@@ -9,19 +9,12 @@ const ScreenStack = createStackNavigator()
 
 const HomeStack = () => {
     return (
-        <ScreenStack.Navigator initialRouteName="Splash"
+        <ScreenStack.Navigator initialRouteName="Home"
             screenOptions={{
                 header: (Props) => <Header {...Props} />
             }
             }
         >
-            <ScreenStack.Screen
-                options={{
-                    headerShown: false,
-                }}
-                name="Splash"
-                component={SplashScreen}
-            />
             <ScreenStack.Screen
                 options={{
                     title: "Home"

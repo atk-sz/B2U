@@ -2,14 +2,11 @@ import * as React from 'react';
 import { Button, StyleSheet, ImageBackground, Text, View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import homeBannerimage from '../images/slide-1.jpg'
-import { StackActions } from "@react-navigation/native";
 
 const Home = () => {
     const navigation = useNavigation()
     const goToLogin = () => {
-        console.log('pressed')
         navigation.navigate('Login')
-        // navigation.dispatch(StackActions.replace("Login"));
     }
     return (
         <View style={styles.container}>

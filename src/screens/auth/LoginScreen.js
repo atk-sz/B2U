@@ -5,9 +5,9 @@ import { AntDesign } from '@expo/vector-icons';
 const { height, width } = Dimensions.get("window");
 
 const LoginScreen = () => {
-    const [value, onChangeText] = React.useState('email or username');
-    const [password, onChangePass] = React.useState('password');
-    // console.log(height, " == ", width)
+    const [value, onChangeText] = React.useState('');
+    const [password, onChangePass] = React.useState('');
+
     return (<View>
         <View>
             <View>
@@ -16,16 +16,17 @@ const LoginScreen = () => {
             <View>
                 <AntDesign name="user" size={24} color="black" />
                 <TextInput
-                secureTextEntry={true}
+                    placeholder='email or username'
                     style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
                     onChangeText={text => onChangeText(text)}
                     value={value}
                 />
             </View>
             <View>
-                <AntDesign name="user" size={24} color="black" />
+                <AntDesign name="lock" size={24} color="black" />
                 <TextInput
-                secureTextEntry={true}
+                    secureTextEntry={true}
+                    placeholder='password'
                     style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
                     onChangeText={text => onChangePass(text)}
                     value={password}

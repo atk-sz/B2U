@@ -8,8 +8,7 @@ const SplashImg = require("../images/assets/splash.png");
 export default function SplashScreen({ navigation }) {
     useEffect(() => {
         setTimeout(() => {
-            // navigation.navigate('Home', { Title: 'Home' })
-            navigation.dispatch(StackActions.replace("Home"));
+            navigation.navigate('HomeStack')
         }, 2000);
     }, []);
 
