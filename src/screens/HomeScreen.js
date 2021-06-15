@@ -5,17 +5,22 @@ import homeBannerimage from '../images/slide-1.jpg'
 
 const Home = () => {
     const navigation = useNavigation()
+
     const goToLogin = () => {
         navigation.navigate('Login')
+    }
+
+    const goToRegister = () => {
+        navigation.navigate('Register')
     }
     return (
         <View style={styles.container}>
             <ImageBackground source={homeBannerimage} style={styles.homeBannerImage}>
-                <View style={styles.titleContainer}><Text style={styles.homeBannerTitle}>CSKAA | VIDEOCONFERENCING</Text></View>
-                <View style={styles.captionContainer}><Text style={styles.caption}>WE ARE ALMOST <Text style={styles.textYellowColor}> READY TO LAUNCH</Text> OUR <Text style={styles.textYellowColor}>NEW VIDEOCONFERENCING PLATFORM!</Text></Text></View>
+                <View style={styles.titleContainer}><Text style={styles.homeBannerTitle}> B2U | VIDEOCONFERENCING</Text></View>
+                <View style={styles.captionContainer}><Text style={styles.caption}>WE ARE ALMOST <Text style={styles.textBlueColor}> READY TO LAUNCH</Text> OUR <Text style={styles.textBlueColor}>NEW VIDEOCONFERENCING PLATFORM!</Text></Text></View>
                 <View style={styles.btnsContainer}>
                     <TouchableOpacity style={styles.signUpBtn}>
-                        <Text style={styles.signUp}>Sign Up</Text>
+                        <Text style={styles.signUp} onPress={goToRegister}>Sign Up</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.letsBeginBtn} onPress={goToLogin}>
                         <Text style={styles.letsBegin}>Let's begin</Text>
@@ -80,7 +85,7 @@ const styles = StyleSheet.create({
     letsBegin: {
         fontWeight: 'bold'
     },
-    textYellowColor: {
-        color: '#f1c11a'
+    textBlueColor: {
+        color: '#036ffc'
     }
 })

@@ -1,59 +1,174 @@
-import * as React from 'react';
-import { Text, View, TextInput, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { AntDesign } from '@expo/vector-icons';
+import React, { useEffect, useState } from "react";
+import {
+    View,
+    StyleSheet,
+    Dimensions,
+    Image,
+    BackHandler,
+    TextInput,
+    Text,
+    TouchableOpacity,
+} from "react-native";
+import { Button } from "react-native-paper";
+
+
+const Face = require("../../images/assets/face.png");
+const SignIn = require("../../images/assets/SignIn.png");
+const Logo = require("../../images/assets/logo.png");
 
 const { height, width } = Dimensions.get("window");
 
-const LoginScreen = () => {
-    const navigation = useNavigation()
-    const [value, onChangeText] = React.useState('');
-    const [password, onChangePass] = React.useState('');
+const styles = StyleSheet.create({
+    root: {
+        backgroundColor: "#fff",
+        flex: 1,
+    },
+    top: {
+        height: height * 0.3,
+        position: "relative",
+    },
+    bottom: {
+        flex: 1,
+        backgroundColor: "#fff",
+        alignItems: "center",
+    },
+});
+
+const LoginScreen = ({ navigation }) => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const gotoRegister = () => {
         navigation.navigate('Register')
     }
 
-    return (<View style={{ flex: 1, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-        <View style={styles.loginBox}>
-            <View>
-                <Text>LOGIN</Text>
-            </View>
-            <View style={{ display: 'flex', flexDirection: 'row' }}>
-                <AntDesign name="user" size={24} color="black" />
-                <TextInput
-                    placeholder='email or username'
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                    onChangeText={text => onChangeText(text)}
-                    value={value}
-                />
-            </View>
-            <View style={{ display: 'flex', flexDirection: 'row' }}>
-                <AntDesign name="lock" size={24} color="black" />
-                <TextInput
-                    secureTextEntry={true}
-                    placeholder='password'
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                    onChangeText={text => onChangePass(text)}
-                    value={password}
-                />
-            </View>
-            <View style={{ display: 'flex', flexDirection: 'row' }}>
-                <Text>or </Text>
-                <TouchableOpacity onPress={gotoRegister}><Text style={{ color: 'blue' }}>Register</Text></TouchableOpacity>
-            </View>
-            <View>
+    const handleBackButtonClick = () => {
+        return true;
+    };
 
+    useEffect(() => {
+        BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick);
+        return () => {
+            BackHandler.removeEventListener(
+                "hardwareBackPress",
+                handleBackButtonClick
+            );
+        };
+    }, []);
+
+
+
+    return (
+        <View
+            style={{
+                ...styles.root,
+                justifyContent: "flex-start",
+                flexDirection: "column",
+            }}
+        >
+            <View style={{ ...styles.top }}>
+                <Image source={Face} style={{ width, height: height * 0.29 }} />
+            </View>
+            <View
+                style={{
+                    flex: 1,
+                    alignItems: "center",
+                    flexDirection: "column",
+                }}
+            >
+                <View
+                    style={{
+                        paddingHorizontal: 10,
+                    }}
+                >
+                    <Image
+                        source={SignIn}
+                        style={{ width: 100, height: 100 }}
+                        resizeMode="contain"
+                    />
+                </View>
+
+                <View
+                    style={{
+                        width: width * 0.7,
+                        flexDirection: "column",
+                        justifyContent: "center",
+                    }}
+                >
+                    <TextInput
+                        onChangeText={(email) => setEmail(email)}
+                        defaultValue={email}
+                        keyboardType="email-address"
+                        placeholder="Email"
+                        style={{
+                            marginBottom: 20,
+                            borderColor: "#2D8CFF",
+                            height: 40,
+                            borderWidth: 1,
+                            padding: 10,
+                            borderRadius: 3,
+                        }}
+                    />
+                    <TextInput
+                        keyboardType="visible-password"
+                        placeholder="Password"
+                        onChangeText={(password) => setPassword(password)}
+                        defaultValue={password}
+                        style={{
+                            marginBottom: 20,
+                            borderColor: "#2D8CFF",
+                            height: 40,
+                            borderWidth: 1,
+                            padding: 10,
+                            borderRadius: 3,
+                        }}
+                    />
+                </View>
+
+                <View
+                    style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                    }}
+                >
+                    <Button
+                        style={{
+                            backgroundColor: "#2D8CFF",
+                            height: 30,
+                            width: width * 0.7,
+                            justifyContent: "center",
+                            alignItems: "center",
+                            margin: 10,
+                        }}
+                        mode="contained"
+                        onPress={() => {
+                            console.log('login press')
+                        }}
+                    >
+                        Login
+                    </Button>
+                </View>
+                <View style={{ display: 'flex', flexDirection: 'row' }}>
+                    <Text>or </Text>
+                    <TouchableOpacity onPress={gotoRegister}><Text style={{ color: 'blue' }}>Register</Text></TouchableOpacity>
+                </View>
+                <View
+                    style={{
+                        flex: 1,
+                        justifyContent: "flex-end",
+                        alignItems: "center",
+                    }}
+                >
+                    <Image
+                        source={Logo}
+                        style={{ height: 100, width: 100 }}
+                        resizeMode="contain"
+                    />
+                </View>
             </View>
         </View>
-    </View>);
+    );
 };
 
 export default LoginScreen;
-
-const styles = StyleSheet.create({
-    loginBox: {
-        width: width * .5,
-        height: height * .5,
-    }
-})
