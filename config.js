@@ -1,0 +1,1 @@
+export const EXPO_BACKEND_API = 'http://103.93.17.125:5000';

@@ -81,6 +81,7 @@ const RegisterScreen = ({ navigation }) => {
                         flex: 1,
                         alignItems: "center",
                         flexDirection: "column",
+                        marginTop: height * .07
                     }}
                 >
                     <View

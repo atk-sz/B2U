@@ -10,7 +10,8 @@ import {
     TouchableOpacity,
 } from "react-native";
 import { Button } from "react-native-paper";
-
+import { login } from "../../apis/auth";
+import { showMessage, hideMessage } from "react-native-flash-message";
 
 const Face = require("../../images/assets/face.png");
 const SignIn = require("../../images/assets/SignIn.png");
@@ -36,8 +37,34 @@ const styles = StyleSheet.create({
 });
 
 const LoginScreen = ({ navigation }) => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("a0sharma@gmail.com");
+    const [password, setPassword] = useState("aman12");
+
+    const loginHandle = () => {
+        if (email.trim() && password.trim()) {
+            login(email, password)
+                .then(res => {
+                    navigation.navigate('Home')
+                    showMessage({
+                        message: "Logged in successfully",
+                        type: "success",
+                    });
+                })
+                .catch(err => {
+                    console.log('err')
+                    console.log(err)
+                    showMessage({
+                        message: "Invalid user or password",
+                        type: "danger",
+                    });
+                })
+        } else {
+            showMessage({
+                message: "Please enter the required fields",
+                type: "danger",
+            });
+        }
+    }
 
     const gotoRegister = () => {
         navigation.navigate('Register')
@@ -75,6 +102,7 @@ const LoginScreen = ({ navigation }) => {
                     flex: 1,
                     alignItems: "center",
                     flexDirection: "column",
+                    marginTop: height * .07
                 }}
             >
                 <View
@@ -131,9 +159,7 @@ const LoginScreen = ({ navigation }) => {
                             margin: 10,
                         }}
                         mode="contained"
-                        onPress={() => {
-                            console.log('login press')
-                        }}
+                        onPress={loginHandle}
                     >
                         Login
                     </Button>
