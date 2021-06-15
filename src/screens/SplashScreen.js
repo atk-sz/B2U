@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
+import { SafeAreaView, Text, StyleSheet, Image, Dimensions } from "react-native";
+// import Constants from 'expo-constants';
+
 const { width, height } = Dimensions.get("window");
-import { StackActions } from "@react-navigation/native";
 
 const SplashImg = require("../images/assets/splash.png");
 
@@ -13,7 +14,7 @@ export default function SplashScreen({ navigation }) {
     }, []);
 
     return (
-        <View style={{ ...styles.container }}>
+        <SafeAreaView style={{ ...styles.container }}>
             <Image
                 style={{
                     width,
@@ -22,7 +23,7 @@ export default function SplashScreen({ navigation }) {
                 source={SplashImg}
                 resizeMode="cover"
             />
-        </View>
+        </SafeAreaView>
     );
 }
 
@@ -30,5 +31,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
+        // marginTop: Constants.statusBarHeight,
     },
 });

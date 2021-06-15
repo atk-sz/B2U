@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     top: {
         height: height * 0.3,
         position: "relative",
+        marginBottom: height * .15,
     },
     bottom: {
         flex: 1,
@@ -76,18 +77,6 @@ const LoginScreen = ({ navigation }) => {
                     flexDirection: "column",
                 }}
             >
-                <View
-                    style={{
-                        paddingHorizontal: 10,
-                    }}
-                >
-                    <Image
-                        source={SignIn}
-                        style={{ width: 100, height: 100 }}
-                        resizeMode="contain"
-                    />
-                </View>
-
                 <View
                     style={{
                         width: width * 0.7,
