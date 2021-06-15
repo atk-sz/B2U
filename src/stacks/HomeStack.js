@@ -4,6 +4,7 @@ import HomeScreen from '../screens/HomeScreen';
 import Header from '../components/navs/Header';
 import SplashScreen from '../screens/SplashScreen';
 import LoginScreen from '../screens/auth/LoginScreen';
+import RegisterScreen from '../screens/auth/RegisterScreen';
 
 const ScreenStack = createStackNavigator()
 
@@ -25,6 +26,11 @@ const HomeStack = () => {
                     title: "Login"
                 }}
                 name="Login" component={LoginScreen} />
+            <ScreenStack.Screen
+                options={{
+                    title: "Register"
+                }}
+                name="Register" component={RegisterScreen} />
         </ScreenStack.Navigator>
     )
 }

@@ -28,8 +28,6 @@ const App = () => {
             name="Splash"
             component={SplashScreen} />
           <Drawer.Screen name="HomeStack" component={HomeStack} />
-          <Drawer.Screen name="Login" component={NotificationsScreen} />
-          <Drawer.Screen name="SignUp" component={NotificationsScreen} />
         </Drawer.Navigator>
       </NavigationContainer>
       <FlashMessage style={{ marginTop: 25 }} position="top" />
