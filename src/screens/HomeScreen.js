@@ -2,20 +2,29 @@ import * as React from 'react';
 import { Button, StyleSheet, ImageBackground, Text, View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import homeBannerimage from '../images/slide-1.jpg'
+import { showMessage } from 'react-native-flash-message';
 
 const Home = () => {
+    const { user } = useSelector((state) => ({ ...state }));
     const navigation = useNavigation()
 
     const goToLogin = () => {
-        navigation.navigate('Login')
+        if (user)
+            navigation.navigate('Createroom')
+        else
+            navigation.navigate('Login')
     }
 
     const goToRegister = () => {
-        navigation.navigate('Register')
-    }
-
-    const gotoRoom = () => {
-        navigation.navigate('Createroom')
+        if (user) {
+            navigation.navigate('Createroom')
+            showMessage({
+                message: "Already Logged in",
+                type: "success",
+            });
+        }
+        else
+            navigation.navigate('Register')
     }
 
     return (
