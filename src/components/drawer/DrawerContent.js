@@ -28,6 +28,9 @@ const DrawerContent = (props) => {
             <TouchableOpacity style={styles.homeBtn} onPress={gotoHome}>
                 <Text>Home</Text>
             </TouchableOpacity>
+            <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                {user && user.accessToken && <Text style={{ fontWeight: 'bold' }}>{user.email}</Text>}
+            </View>
             <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout}>
                 {user && user.accessToken && <Text style={{ fontWeight: 'bold' }}>Logout</Text>}
             </TouchableOpacity>

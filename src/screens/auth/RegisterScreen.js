@@ -225,7 +225,6 @@ const styles = StyleSheet.create({
     top: {
         height: height * 0.3,
         position: "relative",
-        marginBottom: 20
     },
     bottom: {
         flex: 1,
