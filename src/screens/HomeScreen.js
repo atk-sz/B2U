@@ -13,6 +13,11 @@ const Home = () => {
     const goToRegister = () => {
         navigation.navigate('Register')
     }
+
+    const gotoRoom = () => {
+        navigation.navigate('Createroom')
+    }
+
     return (
         <View style={styles.container}>
             <ImageBackground source={homeBannerimage} style={styles.homeBannerImage}>
@@ -24,6 +29,11 @@ const Home = () => {
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.letsBeginBtn} onPress={goToLogin}>
                         <Text style={styles.letsBegin}>Let's begin</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.btnsContainer}>
+                    <TouchableOpacity style={styles.signUpBtn}>
+                        <Text style={styles.signUp} onPress={gotoRoom}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>
             </ImageBackground>

@@ -6,10 +6,13 @@ import SplashScreen from '../screens/SplashScreen';
 import LoginScreen from '../screens/auth/LoginScreen';
 import RegisterScreen from '../screens/auth/RegisterScreen';
 import CreateRoom from '../screens/room/CreateRoom';
+import { useSelector } from 'react-redux';
 
 const ScreenStack = createStackNavigator()
 
 const HomeStack = () => {
+    const { user } = useSelector((state) => ({ ...state }));
+
     return (
         <ScreenStack.Navigator initialRouteName="Home"
             screenOptions={{
@@ -32,11 +35,16 @@ const HomeStack = () => {
                     title: "Register"
                 }}
                 name="Register" component={RegisterScreen} />
-            <ScreenStack.Screen
-                options={{
-                    title: "Createroom"
-                }}
-                name="Createroom" component={CreateRoom} />
+            {
+                user && user.accessToken &&
+                <>
+                    <ScreenStack.Screen
+                        options={{
+                            title: "Createroom"
+                        }}
+                        name="Createroom" component={CreateRoom} />
+                </>
+            }
         </ScreenStack.Navigator>
     )
 }
