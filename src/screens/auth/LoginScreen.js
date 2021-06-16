@@ -19,23 +19,6 @@ const Logo = require("../../images/assets/logo.png");
 
 const { height, width } = Dimensions.get("window");
 
-const styles = StyleSheet.create({
-    root: {
-        backgroundColor: "#fff",
-        flex: 1,
-    },
-    top: {
-        height: height * 0.3,
-        position: "relative",
-        marginBottom: height * .15,
-    },
-    bottom: {
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-    },
-});
-
 const LoginScreen = ({ navigation }) => {
     const dispatch = useDispatch();
     const { user } = useSelector((state) => ({ ...state }));
@@ -61,10 +44,6 @@ const LoginScreen = ({ navigation }) => {
         if (email.trim() && password.trim()) {
             login(email, password)
                 .then(res => {
-                    showMessage({
-                        message: "Logged in successfully",
-                        type: "success",
-                    });
                     dispatch({
                         type: "LOGGED_IN_USER",
                         payload: {
@@ -72,6 +51,10 @@ const LoginScreen = ({ navigation }) => {
                             accessToken: res.data.accessToken,
                             tokenType: res.data.tokenType
                         },
+                    });
+                    showMessage({
+                        message: "Logged in successfully",
+                        type: "success",
                     });
                     navigation.navigate('Createroom')
                 })
@@ -200,3 +183,21 @@ const LoginScreen = ({ navigation }) => {
 };
 
 export default LoginScreen;
+
+
+const styles = StyleSheet.create({
+    root: {
+        backgroundColor: "#fff",
+        flex: 1,
+    },
+    top: {
+        height: height * 0.3,
+        position: "relative",
+        marginBottom: height * .15,
+    },
+    bottom: {
+        flex: 1,
+        backgroundColor: "#fff",
+        alignItems: "center",
+    },
+});

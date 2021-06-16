@@ -22,23 +22,6 @@ const Logo = require("../../images/assets/logo.png");
 
 const { height, width } = Dimensions.get("window");
 
-const styles = StyleSheet.create({
-    root: {
-        backgroundColor: "#fff",
-        flex: 1,
-    },
-    top: {
-        height: height * 0.3,
-        position: "relative",
-        marginBottom: 20
-    },
-    bottom: {
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-    },
-});
-
 const RegisterScreen = ({ navigation }) => {
     const { user } = useSelector((state) => ({ ...state }));
     const [name, setName] = useState("try");
@@ -233,3 +216,20 @@ const RegisterScreen = ({ navigation }) => {
 };
 
 export default RegisterScreen;
+
+const styles = StyleSheet.create({
+    root: {
+        backgroundColor: "#fff",
+        flex: 1,
+    },
+    top: {
+        height: height * 0.3,
+        position: "relative",
+        marginBottom: 20
+    },
+    bottom: {
+        flex: 1,
+        backgroundColor: "#fff",
+        alignItems: "center",
+    },
+});
