@@ -3,6 +3,7 @@ import { Button, StyleSheet, ImageBackground, Text, View, TouchableOpacity } fro
 import { useNavigation } from '@react-navigation/native';
 import homeBannerimage from '../images/slide-1.jpg'
 import { showMessage } from 'react-native-flash-message';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
     const { user } = useSelector((state) => ({ ...state }));
