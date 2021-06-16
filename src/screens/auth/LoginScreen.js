@@ -40,6 +40,16 @@ const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState("a0sharma@gmail.com");
     const [password, setPassword] = useState("aman12");
 
+    useEffect(() => {
+        BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick);
+        return () => {
+            BackHandler.removeEventListener(
+                "hardwareBackPress",
+                handleBackButtonClick
+            );
+        };
+    }, []);
+
     const loginHandle = () => {
         if (email.trim() && password.trim()) {
             login(email, password)
@@ -73,18 +83,6 @@ const LoginScreen = ({ navigation }) => {
     const handleBackButtonClick = () => {
         return true;
     };
-
-    useEffect(() => {
-        BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick);
-        return () => {
-            BackHandler.removeEventListener(
-                "hardwareBackPress",
-                handleBackButtonClick
-            );
-        };
-    }, []);
-
-
 
     return (
         <View

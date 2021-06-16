@@ -12,6 +12,8 @@ import {
 } from "react-native";
 import { StackActions } from "@react-navigation/native";
 import { Button } from "react-native-paper";
+import { register } from "../../apis/auth";
+import { showMessage } from "react-native-flash-message";
 
 const Face = require("../../images/assets/face.png");
 const SignIn = require("../../images/assets/SignIn.png");
@@ -37,18 +39,10 @@ const styles = StyleSheet.create({
 });
 
 const RegisterScreen = ({ navigation }) => {
-    const [name, setName] = useState("");
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
-    const gotoLogin = () => {
-        navigation.navigate('Login')
-    }
-
-    const handleBackButtonClick = () => {
-        return true;
-    };
+    const [name, setName] = useState("try");
+    const [username, setUsername] = useState("try1");
+    const [email, setEmail] = useState("try1@try.com");
+    const [password, setPassword] = useState("try");
 
     useEffect(() => {
         BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick);
@@ -59,6 +53,38 @@ const RegisterScreen = ({ navigation }) => {
             );
         };
     }, []);
+
+    const gotoLogin = () => {
+        navigation.navigate('Login')
+    }
+
+    const handleBackButtonClick = () => {
+        return true;
+    };
+
+    const handleRegister = () => {
+        if (name.trim() && username.trim() && email.trim() && password.trim()) {
+            register(name, username, email, password)
+                .then(res => {
+                    navigation.navigate('Home')
+                    showMessage({
+                        message: "Registered successfully",
+                        type: "success",
+                    });
+                })
+                .catch(err => {
+                    showMessage({
+                        message: err.response ? err.response.data.message : 'there was some error please try again later',
+                        type: "danger",
+                    });
+                })
+        } else {
+            showMessage({
+                message: "Please enter the required fields",
+                type: "danger",
+            });
+        }
+    }
 
     return (
         <View
@@ -166,10 +192,7 @@ const RegisterScreen = ({ navigation }) => {
                                 margin: 10,
                             }}
                             mode="contained"
-                            onPress={() => {
-                                //   onLogin();
-                                console.log('reg')
-                            }}
+                            onPress={handleRegister}
                         >
                             Register
                         </Button>

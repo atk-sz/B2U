@@ -7,3 +7,12 @@ export const login = async (email, password) => {
         password: password
     });
 };
+
+export const register = async (name, username, email, password) => {
+    return await axios.post(`${EXPO_BACKEND_API}/api/auth/signup`, {
+        name,
+        username,
+        email,
+        password,
+    });
+};
