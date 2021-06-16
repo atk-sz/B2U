@@ -134,7 +134,7 @@ const RegisterScreen = ({ navigation }) => {
                             }}
                         />
                         <TextInput
-                            keyboardType="visible-password"
+                            secureTextEntry={true}
                             placeholder="Password"
                             onChangeText={(password) => setPassword(password)}
                             defaultValue={password}
