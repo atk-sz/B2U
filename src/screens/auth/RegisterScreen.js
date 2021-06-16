@@ -14,6 +14,7 @@ import { StackActions } from "@react-navigation/native";
 import { Button } from "react-native-paper";
 import { register } from "../../apis/auth";
 import { showMessage } from "react-native-flash-message";
+import { useSelector } from "react-redux";
 
 const Face = require("../../images/assets/face.png");
 const SignIn = require("../../images/assets/SignIn.png");
@@ -39,10 +40,21 @@ const styles = StyleSheet.create({
 });
 
 const RegisterScreen = ({ navigation }) => {
+    const { user } = useSelector((state) => ({ ...state }));
     const [name, setName] = useState("try");
     const [username, setUsername] = useState("try1");
     const [email, setEmail] = useState("try1@try.com");
     const [password, setPassword] = useState("try");
+
+    useEffect(() => {
+        if (user) {
+            navigation.navigate('Createroom')
+            showMessage({
+                message: "Already Logged in",
+                type: "success",
+            });
+        }
+    }, [])
 
     useEffect(() => {
         BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick);

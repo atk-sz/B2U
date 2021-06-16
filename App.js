@@ -6,6 +6,10 @@ import FlashMessage from 'react-native-flash-message';
 import HomeStack from './src/stacks/HomeStack';
 import DrawerContent from './src/components/drawer/DrawerContent';
 import SplashScreen from './src/screens/SplashScreen';
+import rootReducer from './src/reducers';
+import { createStore } from 'redux';
+import { Provider } from "react-redux";
+import { Provider as PaperProvider } from "react-native-paper";
 
 function NotificationsScreen({ navigation }) {
   return (
@@ -16,22 +20,30 @@ function NotificationsScreen({ navigation }) {
   );
 }
 const Drawer = createDrawerNavigator();
+const store = createStore(
+  rootReducer,
+  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 const App = () => {
   return (
-    <View style={{ flex: 1 }}>
-      <NavigationContainer>
-        <Drawer.Navigator initialRouteName="Splash" drawerContent={props => <DrawerContent {...props} />}>
-          <Drawer.Screen options={{
-            headerShown: false,
-          }}
-            name="Splash"
-            component={SplashScreen} />
-          <Drawer.Screen name="HomeStack" component={HomeStack} />
-        </Drawer.Navigator>
-      </NavigationContainer>
-      <FlashMessage style={{ marginTop: 25 }} position="top" />
-    </View>
+    <Provider {...{ store }}>
+      <PaperProvider>
+        <View style={{ flex: 1 }}>
+          <NavigationContainer>
+            <Drawer.Navigator initialRouteName="Splash" drawerContent={props => <DrawerContent {...props} />}>
+              <Drawer.Screen options={{
+                headerShown: false,
+              }}
+                name="Splash"
+                component={SplashScreen} />
+              <Drawer.Screen name="HomeStack" component={HomeStack} />
+            </Drawer.Navigator>
+          </NavigationContainer>
+          <FlashMessage style={{ marginTop: 25 }} position="top" />
+        </View>
+      </PaperProvider>
+    </Provider>
   );
 }
 

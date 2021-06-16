@@ -12,9 +12,9 @@ import {
 import { Button } from "react-native-paper";
 import { login } from "../../apis/auth";
 import { showMessage, hideMessage } from "react-native-flash-message";
+import { useDispatch, useSelector } from "react-redux";
 
 const Face = require("../../images/assets/face.png");
-const SignIn = require("../../images/assets/SignIn.png");
 const Logo = require("../../images/assets/logo.png");
 
 const { height, width } = Dimensions.get("window");
@@ -37,8 +37,15 @@ const styles = StyleSheet.create({
 });
 
 const LoginScreen = ({ navigation }) => {
+    const dispatch = useDispatch();
+    const { user } = useSelector((state) => ({ ...state }));
     const [email, setEmail] = useState("a0sharma@gmail.com");
     const [password, setPassword] = useState("aman12");
+
+    useEffect(() => {
+        if (user)
+            navigation.navigate('Createroom')
+    }, [])
 
     useEffect(() => {
         BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick);
@@ -54,17 +61,25 @@ const LoginScreen = ({ navigation }) => {
         if (email.trim() && password.trim()) {
             login(email, password)
                 .then(res => {
-                    navigation.navigate('Home')
                     showMessage({
                         message: "Logged in successfully",
                         type: "success",
                     });
+                    dispatch({
+                        type: "LOGGED_IN_USER",
+                        payload: {
+                            email,
+                            accessToken: res.data.accessToken,
+                            tokenType: res.data.tokenType
+                        },
+                    });
+                    navigation.navigate('Createroom')
                 })
                 .catch(err => {
                     console.log('err')
                     console.log(err)
                     showMessage({
-                        message: "Invalid user or password",
+                        message: err.response ? err.response.data.message : "Invalid user or password",
                         type: "danger",
                     });
                 })
@@ -150,7 +165,7 @@ const LoginScreen = ({ navigation }) => {
                     <Button
                         style={{
                             backgroundColor: "#2D8CFF",
-                            height: 30,
+                            height: 35,
                             width: width * 0.7,
                             justifyContent: "center",
                             alignItems: "center",
