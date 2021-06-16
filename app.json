@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "b2u",
-    "slug": "b2u",
+    "name": "B2U",
+    "slug": "B2U",
     "version": "1.0.0",
     "sdkVersion":"41.0.0",
     "orientation": "portrait",
@@ -22,7 +22,7 @@
     },
     "android": {
       "package": "com.webcanon.b2u",
-      "versionCode": 2,
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
