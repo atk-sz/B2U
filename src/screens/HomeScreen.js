@@ -31,11 +31,6 @@ const Home = () => {
                         <Text style={styles.letsBegin}>Let's begin</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.btnsContainer}>
-                    <TouchableOpacity style={styles.signUpBtn}>
-                        <Text style={styles.signUp} onPress={gotoRoom}>Sign Up</Text>
-                    </TouchableOpacity>
-                </View>
             </ImageBackground>
         </View>
     )
