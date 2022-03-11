@@ -12,6 +12,7 @@ const CreateRoom = () => {
     }, [])
 
     const onConferenceTerminated = (nativeEvent) => {
+        // testing
         /* Conference terminated event */
     }
 
